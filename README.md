@@ -64,9 +64,18 @@ Ou acesse a versão online via GitHub Pages: **[https://skyzinha-chan.github.io/
 
 ---
 
-## 📄 Licença
+---
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+## ⚖️ Licença
+
+Este projeto possui um licenciamento duplo para separar o código-fonte do conteúdo acadêmico.
+
+* O **código-fonte** da ferramenta (`index.html`) é licenciado sob a **[Licença MIT](LICENSE)**.
+* O **conteúdo textual e educacional** do artigo (`GameDesign.pdf`) é licenciado sob a **[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/)**.
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+
+---
 
 ---
 
