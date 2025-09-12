@@ -64,7 +64,6 @@ Ou acesse a versão online via GitHub Pages: **[https://skyzinha-chan.github.io/
 
 ---
 
----
 
 ## ⚖️ Licença
 
@@ -89,5 +88,36 @@ Este projeto possui um licenciamento duplo para separar o código-fonte do conte
 | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------: |
 | **Leonardo Vinicius da Costa Gomes** | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github)](https://github.com/767616/LeonardoVinicius767616) |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/leonardo-vinicius7766/)  | [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram)](https://www.instagram.com/leonardo.vinicius07/) |
 | **Talita Mendonça Marques**          |         [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github)](https://github.com/skyzinha-chan)         | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin)](https://www.linkedin.com/in/talita-mendonca-marques/) |    [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram)](https://www.instagram.com/skyzinha_chan/)    |
+
+</div>
+
+
+
+<div align="center">
+
+
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/skyzinha-chan">
+        <img src="https://github.com/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos/blob/main/assets/talita-mendonca.jpg?raw=true" width="150px;" alt="Foto de Talita Mendonça Marques" style="border-radius:50%;"/>
+        <br />
+        <sub><b>Talita Mendonça Marques</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/767616/LeonardoVinicius767616">
+        <img src="https://github.com/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos/blob/main/assets/leonardo-vinicius.jpg?raw=true" width="150px;" alt="Foto de Leonardo Vinicius da Costa Gomes" style="border-radius:50%;"/>
+        <br />
+        <sub><b>Leonardo Vinicius da Costa Gomes</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+**Licenciatura em Ciência da Computação**
+<br>
+Instituto Federal de Mato Grosso do Sul - **Campus Jardim**
 
 </div>
