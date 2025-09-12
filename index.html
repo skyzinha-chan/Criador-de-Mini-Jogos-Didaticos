@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Criador de Mini-Jogos Híbrido</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+            .option-button {
+                transition: all 0.2s ease-in-out;
+                border: 2px solid transparent;
+            }
+
+            .option-button.selected {
+                transform: scale(1.05);
+                color: white;
+                border-color: rgba(255, 255, 255, 0.6);
+            }
+
+            /* Cores para os pilares */
+            .theme-selected {
+                background-color: #2563eb;
+            }
+
+            /* Azul */
+            .mechanic-selected {
+                background-color: #16a34a;
+            }
+
+            /* Verde */
+            .rule-selected {
+                background-color: #dc2626;
+            }
+
+            /* Vermelho */
+            .feedback-selected {
+                background-color: #d97706;
+            }
+
+            /* Amarelo */
+
+            /* Efeito de "Juicy Feedback" no body */
+            body.correct-answer-glow {
+                background-color: #064e3b;
+            }
+
+            body.incorrect-answer-glow {
+                background-color: #7f1d1d;
+            }
+
+            /* [MELHORIA 4] Animação de Shake */
+            @keyframes shake {
+
+                0%,
+                100% {
+                    transform: translateX(0);
+                }
+
+                10%,
+                30%,
+                50%,
+                70%,
+                90% {
+                    transform: translateX(-5px);
+                }
+
+                20%,
+                40%,
+                60%,
+                80% {
+                    transform: translateX(5px);
+                }
+            }
+
+            .shake-animation {
+                animation: shake 0.5s ease-in-out;
+            }
+
+            #configurator,
+            #game-container {
+                transition: opacity 0.5s, transform 0.5s;
+            }
+
+            .hidden-screen {
+                opacity: 0;
+                transform: scale(0.95);
+                pointer-events: none;
+                position: absolute;
+                width: 100%;
+            }
+        </style>
+    </head>
+
+    <body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+
+        <div id="app-container" class="w-full max-w-4xl relative">
+            <!-- ECRÃ DE CONFIGURAÇÃO -->
+            <div id="configurator" class="space-y-6 p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl">
+                <header class="text-center mb-6">
+                    <h1 class="text-3xl md:text-4xl font-bold text-white">Criador de Mini-Jogos Didáticos</h1>
+                    <p class="mt-2 text-lg text-gray-300">Atividade Interativa para a Turma</p>
+                    <p class="mt-4 text-base text-gray-400">Vamos projetar um jogo juntos! A turma decide, e nós
+                        construímos. Escolham uma opção em cada categoria para definirmos os pilares do nosso jogo.</p>
+                </header>
+
+                <main>
+                    <!-- [MELHORIA 1] Barra de Progresso -->
+                    <div class="w-full bg-gray-700 rounded-full h-2.5 mb-6">
+                        <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full"
+                            style="width: 0%; transition: width 0.5s;"></div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- 1. Engajamento -->
+                        <div class="space-y-3 p-4 bg-gray-900 rounded-lg border border-gray-700" data-pillar="theme">
+                            <h2
+                                class="text-xl font-semibold text-center text-blue-400 flex items-center justify-center gap-2">
+                                <!-- [MELHORIA 2] Ícone -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 15v-1a4 4 0 00-4-4H8m0 0l4 4m-4-4l4-4m-4 4h12a4 4 0 014 4v1m-4-8l-4-4m4 4l-4 4" />
+                                </svg>
+                                1. Tema (Engajamento)
+                            </h2>
+                            <p class="text-center text-sm text-gray-400">Qual será o objetivo educacional do nosso jogo?
+                            </p>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="tabuada">Tabuada</button>
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="capitais">Capitais</button>
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="agua">Ciclo da Água</button>
+                            </div>
+                        </div>
+
+                        <!-- 2. Mecânica -->
+                        <div class="space-y-3 p-4 bg-gray-900 rounded-lg border border-gray-700" data-pillar="mechanic">
+                            <h2
+                                class="text-xl font-semibold text-center text-green-400 flex items-center justify-center gap-2">
+                                <!-- [MELHORIA 2] Ícone -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                                </svg>
+                                2. Mecânica (Interação)
+                            </h2>
+                            <p class="text-center text-sm text-gray-400">Como o jogador irá interagir para responder?
+                            </p>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="choice">Múltipla Escolha</button>
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="drag">Arrastar e Soltar</button>
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="type">Digitar Resposta</button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Regra -->
+                        <div class="space-y-3 p-4 bg-gray-900 rounded-lg border border-gray-700" data-pillar="rule">
+                            <h2
+                                class="text-xl font-semibold text-center text-red-400 flex items-center justify-center gap-2">
+                                <!-- [MELHORIA 2] Ícone -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                3. Regra (Desafio)
+                            </h2>
+                            <p class="text-center text-sm text-gray-400">Qual condição adicionará um desafio ao jogo?
+                            </p>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="time">Limite de Tempo</button>
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="lives">Sistema de Vidas</button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Feedback -->
+                        <div class="space-y-3 p-4 bg-gray-900 rounded-lg border border-gray-700" data-pillar="feedback">
+                            <h2
+                                class="text-xl font-semibold text-center text-yellow-400 flex items-center justify-center gap-2">
+                                <!-- [MELHORIA 2] Ícone -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                </svg>
+                                4. Feedback (Comunicação)
+                            </h2>
+                            <p class="text-center text-sm text-gray-400">Como o jogo comunicará o acerto ou erro?</p>
+                            <div class="flex flex-wrap justify-center gap-3">
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="visual">Apenas Visual</button>
+                                <button
+                                    class="option-button bg-gray-700 hover:bg-gray-600 rounded-lg px-4 py-2 font-medium"
+                                    data-value="sound">Visual + Sons</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <button id="build-button"
+                            class="w-full md:w-auto bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-700 transition-all disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center mx-auto"
+                            disabled>
+                            🎮 Construir Protótipo do Jogo 🕹️!
+                        </button>
+                    </div>
+                </main>
+            </div>
+
+            <!-- ECRÃ DO JOGO -->
+            <div id="game-container" class="p-8 bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl hidden-screen">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="game-title" class="text-2xl font-bold text-blue-400">Jogando...</h2>
+                    <div id="game-stats" class="flex items-center space-x-4 text-xl"></div>
+                </div>
+                <div id="question-area"
+                    class="text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+                </div>
+                <div id="answer-area" class="mt-8"></div>
+                <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                <button id="restart-button"
+                    class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold hidden">Jogar
+                    Novamente</button>
+            </div>
+        </div>
+
+        <script>
+            // --- LÓGICA DE CONFIGURAÇÃO ---
+            const gameConfig = { theme: null, mechanic: null, rule: null, feedback: null }
+            const buildButton = document.getElementById( 'build-button' )
+            const progressBar = document.getElementById( 'progress-bar' )
+
+            document.querySelectorAll( '[data-pillar]' ).forEach( container => {
+                container.addEventListener( 'click', ( e ) => {
+                    if ( e.target.tagName === 'BUTTON' ) {
+                        const pillar = container.dataset.pillar
+                        const value = e.target.dataset.value
+                        gameConfig[ pillar ] = value
+
+                        container.querySelectorAll( 'button' ).forEach( btn => {
+                            btn.classList.remove( 'selected', 'theme-selected', 'mechanic-selected', 'rule-selected', 'feedback-selected' )
+                        } )
+                        e.target.classList.add( 'selected', `${ pillar }-selected` )
+                        checkAllSelected()
+                    }
+                } )
+            } )
+
+            function checkAllSelected () {
+                const selectedCount = Object.values( gameConfig ).filter( val => val !== null ).length
+                const progressPercentage = ( selectedCount / 4 ) * 100
+                progressBar.style.width = `${ progressPercentage }%`
+
+                const allSelected = selectedCount === 4
+                buildButton.disabled = !allSelected
+            }
+
+            buildButton.addEventListener( 'click', () => {
+                // [MELHORIA 3] Feedback no Botão
+                buildButton.disabled = true
+                buildButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Construindo...
+            `
+
+                setTimeout( () => {
+                    buildGame()
+                    buildButton.disabled = false
+                    buildButton.innerHTML = 'Construir Protótipo!'
+                }, 1000 )
+            } )
+
+            // --- DADOS DO JOGO ---
+            const questions = {
+                tabuada: [ { q: "7 x 8?", a: "56", o: [ "49", "54", "63" ] }, { q: "6 x 9?", a: "54", o: [ "56", "48", "63" ] }, { q: "12 x 5?", a: "60", o: [ "50", "65", "70" ] }, { q: "9 x 9?", a: "81", o: [ "72", "89", "91" ] } ],
+                capitais: [ { q: "Capital do Japão?", a: "Tóquio", o: [ "Pequim", "Seul", "Bangkok" ] }, { q: "Capital da Austrália?", a: "Camberra", o: [ "Sydney", "Melbourne", "Perth" ] }, { q: "Capital do Canadá?", a: "Ottawa", o: [ "Toronto", "Vancouver", "Montreal" ] }, { q: "Capital da Suíça?", a: "Berna", o: [ "Zurique", "Genebra", "Basileia" ] } ],
+                agua: [ { q: "Água vira vapor em qual processo?", a: "Evaporação", o: [ "Condensação", "Precipitação", "Infiltração" ] }, { q: "Vapor vira líquido em qual processo?", a: "Condensação", o: [ "Evaporação", "Sublimação", "Precipitação" ] }, { q: "Chuva, neve ou granizo são formas de...", a: "Precipitação", o: [ "Condensação", "Evaporação", "Transpiração" ] } ]
+            }
+            const themeTitles = { tabuada: "Desafio da Tabuada", capitais: "Quiz das Capitais", agua: "Ciclo da Água" }
+
+            // --- LÓGICA DO JOGO ---
+            let currentQuestionSet, currentQuestion, lives, timer, timerInterval, audioCtx
+            const configurator = document.getElementById( 'configurator' )
+            const gameContainer = document.getElementById( 'game-container' )
+            const gameTitle = document.getElementById( 'game-title' )
+            const gameStats = document.getElementById( 'game-stats' )
+            const questionArea = document.getElementById( 'question-area' )
+            const answerArea = document.getElementById( 'answer-area' )
+            const feedbackMessage = document.getElementById( 'feedback-message' )
+            const restartButton = document.getElementById( 'restart-button' )
+
+            restartButton.addEventListener( 'click', () => {
+                gameContainer.classList.add( 'hidden-screen' )
+                setTimeout( () => {
+                    configurator.classList.remove( 'hidden-screen' )
+                }, 100 )
+            } )
+
+            function playSound ( type ) {
+                if ( gameConfig.feedback !== 'sound' || !audioCtx ) return
+                const oscillator = audioCtx.createOscillator()
+                const gainNode = audioCtx.createGain()
+                oscillator.type = ( type === 'correct' ) ? 'sine' : 'square'
+                oscillator.frequency.setValueAtTime( ( type === 'correct' ) ? 600 : 150, audioCtx.currentTime )
+                gainNode.gain.setValueAtTime( 0.2, audioCtx.currentTime )
+                oscillator.connect( gainNode )
+                gainNode.connect( audioCtx.destination )
+                oscillator.start()
+                oscillator.stop( audioCtx.currentTime + 0.15 )
+            }
+
+            function buildGame () {
+                if ( gameConfig.feedback === 'sound' && !audioCtx ) {
+                    audioCtx = new ( window.AudioContext || window.webkitAudioContext )()
+                }
+
+                configurator.classList.add( 'hidden-screen' )
+                setTimeout( () => {
+                    gameContainer.classList.remove( 'hidden-screen' )
+                }, 100 )
+
+                restartButton.classList.add( 'hidden' )
+                currentQuestionSet = [ ...questions[ gameConfig.theme ] ]
+                gameTitle.textContent = themeTitles[ gameConfig.theme ]
+                if ( gameConfig.rule === 'lives' ) lives = 3
+                if ( gameConfig.rule === 'time' ) timer = 15
+                updateStats()
+                nextQuestion()
+            }
+
+            function updateStats () {
+                gameStats.innerHTML = ''
+                if ( gameConfig.rule === 'lives' ) {
+                    let hearts = Array.from( { length: 3 }, ( _, i ) => `<span class="text-2xl ${ i < lives ? 'text-red-500' : 'text-gray-600' }">♥</span>` ).join( '' )
+                    gameStats.innerHTML = `<div>${ hearts }</div>`
+                } else if ( gameConfig.rule === 'time' ) {
+                    gameStats.innerHTML = `<div class="text-yellow-400 text-2xl font-mono">${ timer.toString().padStart( 2, '0' ) }s</div>`
+                }
+            }
+
+            function startTimer () {
+                clearInterval( timerInterval )
+                timer = 15
+                updateStats()
+                timerInterval = setInterval( () => {
+                    timer--
+                    updateStats()
+                    if ( timer <= 0 ) {
+                        clearInterval( timerInterval )
+                        handleAnswer( false, true ) // timeOut = true
+                    }
+                }, 1000 )
+            }
+
+            function nextQuestion () {
+                feedbackMessage.textContent = ''
+                answerArea.innerHTML = ''
+                answerArea.classList.remove( 'shake-animation' )
+
+                if ( currentQuestionSet.length === 0 ) {
+                    endGame( true )
+                    return
+                }
+                const questionIndex = Math.floor( Math.random() * currentQuestionSet.length )
+                currentQuestion = currentQuestionSet.splice( questionIndex, 1 )[ 0 ]
+                questionArea.textContent = currentQuestion.q
+
+                const options = [ ...currentQuestion.o, currentQuestion.a ].sort( () => Math.random() - 0.5 )
+                answerArea.className = 'mt-8'
+
+                switch ( gameConfig.mechanic ) {
+                    case 'choice':
+                        answerArea.classList.add( 'grid', 'grid-cols-2', 'gap-4' )
+                        options.forEach( opt => {
+                            const btn = document.createElement( 'button' )
+                            btn.textContent = opt
+                            btn.className = "w-full bg-gray-700 hover:bg-blue-600 p-3 rounded-lg text-lg transition-colors"
+                            btn.onclick = () => handleAnswer( opt === currentQuestion.a )
+                            answerArea.appendChild( btn )
+                        } )
+                        break
+                    case 'drag':
+                        const dropZone = document.createElement( 'div' )
+                        dropZone.className = "w-full h-24 bg-gray-900 rounded-lg flex items-center justify-center text-gray-500 border-2 border-dashed border-gray-600"
+                        dropZone.textContent = "Arraste a resposta correta aqui"
+                        const optionsContainer = document.createElement( 'div' )
+                        optionsContainer.className = "mt-4 grid grid-cols-4 gap-4"
+                        options.forEach( opt => {
+                            const btn = document.createElement( 'div' )
+                            btn.textContent = opt
+                            btn.draggable = true
+                            btn.className = "bg-gray-700 hover:bg-blue-600 p-3 rounded-lg text-lg cursor-grab"
+                            btn.ondragstart = ( e ) => e.dataTransfer.setData( "text/plain", opt )
+                            optionsContainer.appendChild( btn )
+                        } )
+                        dropZone.ondragover = ( e ) => e.preventDefault()
+                        dropZone.ondrop = ( e ) => {
+                            e.preventDefault()
+                            const data = e.dataTransfer.getData( "text/plain" )
+                            dropZone.textContent = `Resposta: ${ data }`
+                            handleAnswer( data === currentQuestion.a )
+                        }
+                        answerArea.append( dropZone, optionsContainer )
+                        break
+                    case 'type':
+                        const input = document.createElement( 'input' )
+                        input.type = "text"
+                        input.className = "w-full bg-gray-900 p-3 rounded-lg text-center text-lg"
+                        input.placeholder = "Digite sua resposta..."
+                        const btn = document.createElement( 'button' )
+                        btn.textContent = "Verificar"
+                        btn.className = "w-full mt-4 bg-blue-600 hover:bg-blue-700 p-3 rounded-lg font-bold"
+                        btn.onclick = () => handleAnswer( input.value.trim().toLowerCase() === currentQuestion.a.toLowerCase() )
+                        answerArea.append( input, btn )
+                        input.focus()
+                        break
+                }
+                if ( gameConfig.rule === 'time' ) startTimer()
+            }
+
+            function handleAnswer ( isCorrect, timeOut = false ) {
+                clearInterval( timerInterval )
+                answerArea.querySelectorAll( 'button, input, div[draggable]' ).forEach( el => el.style.pointerEvents = 'none' )
+
+                document.body.classList.add( isCorrect ? 'correct-answer-glow' : 'incorrect-answer-glow' )
+                playSound( isCorrect ? 'correct' : 'incorrect' )
+
+                if ( isCorrect ) {
+                    feedbackMessage.textContent = "Correto!"
+                    feedbackMessage.className = "mt-6 text-center text-2xl font-bold h-8 text-green-400"
+                } else {
+                    answerArea.classList.add( 'shake-animation' )
+                    feedbackMessage.textContent = timeOut ? "Tempo esgotado!" : `Incorreto! A resposta era: ${ currentQuestion.a }`
+                    feedbackMessage.className = "mt-6 text-center text-2xl font-bold h-8 text-red-400"
+                    if ( gameConfig.rule === 'lives' ) {
+                        lives--
+                        updateStats()
+                        if ( lives <= 0 ) {
+                            setTimeout( () => endGame( false ), 500 )
+                            return
+                        }
+                    }
+                }
+                setTimeout( () => {
+                    document.body.classList.remove( 'correct-answer-glow', 'incorrect-answer-glow' )
+                    nextQuestion()
+                }, isCorrect ? 1500 : 2500 )
+            }
+
+            function endGame ( isWin ) {
+                clearInterval( timerInterval )
+                document.body.classList.remove( 'correct-answer-glow', 'incorrect-answer-glow' )
+                answerArea.innerHTML = ''
+                questionArea.textContent = isWin ? "Parabéns, você completou o desafio!" : "Fim de Jogo!"
+                feedbackMessage.textContent = isWin ? "Excelente trabalho!" : "Mais sorte da próxima vez!"
+                feedbackMessage.className = `mt-6 text-center text-2xl font-bold h-8 ${ isWin ? 'text-yellow-400' : 'text-gray-500' }`
+                restartButton.classList.remove( 'hidden' )
+            }
+        </script>
+    </body>
+
+</html>
