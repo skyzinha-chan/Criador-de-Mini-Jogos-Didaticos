@@ -23,12 +23,21 @@ A estrutura de arquivos recomendada para o repositório é:
 
 ```
 ├── 📁 assets/
+├── 📁 css/
+│   └── 🎨 style.css       # Folha de estilos para customizações visuais.
 ├── 📁 docs/
 │   └── 🕹 GameDesign.pdf
-├── .gitignore
-├── index.html
-├── LICENSE
-└── README.md
+├── 📁 js/
+│   ├── 📜 main.js         # Ponto de entrada da aplicação, orquestra os módulos.
+│   ├── 📜 ui.js           # Módulo para manipulação do DOM e da interface.
+│   ├── 📜 configurator.js # Módulo para a lógica da tela de configuração do jogo.
+│   ├── 📜 game.js         # Módulo para a lógica principal do jogo (gameplay).
+│   ├── 📜 data.js         # Módulo que armazena os dados do jogo (perguntas, etc).
+│   └── 📜 audio.js        # Módulo para controle e reprodução de áudio.
+├── 🚫 .gitignore
+├── 🌐 index.html
+├── ⚖️ LICENSE
+└── ℹ️ README.md
 
 ```
 ## ✨ Funcionalidades
@@ -38,6 +47,21 @@ A estrutura de arquivos recomendada para o repositório é:
 * **Geração de Protótipo:** A ferramenta constrói um mini-jogo jogável com base nas escolhas feitas.
 * **Design Polido:** Interface com tema escuro, ícones, animações e feedback visual ("juicy feedback") para uma experiência de usuário aprimorada.
 ---
+
+## 🧩 Responsabilidades dos Módulos JavaScript
+A lógica foi dividida para tornar o código mais legível e fácil de manter:
+
+* `main.js`: O "maestro". Ele inicializa a aplicação e coordena a comunicação entre os outros módulos.
+
+* `ui.js`: O "cenógrafo". Responsável por todas as interações diretas com o HTML: buscar elementos, trocar de tela, exibir mensagens, atualizar status, etc.
+
+* `configurator.js`: O "arquiteto". Gerencia o estado e os eventos da tela de configuração, coletando as escolhas do usuário.
+
+* `game.js`: O "diretor do jogo". Contém toda a lógica de gameplay: iniciar o jogo, controlar o fluxo de perguntas, verificar respostas e gerenciar o estado de vitória/derrota.
+
+* `data.js`: A "biblioteca". Um local centralizado para armazenar todo o conteúdo do jogo, como perguntas, respostas e títulos.
+
+* `audio.js`: O "engenheiro de som". Isola a complexidade da Web Audio API para tocar os sons de feedback.
 
 ## 🚀 Como Usar e Acessar a Versão Online
 
