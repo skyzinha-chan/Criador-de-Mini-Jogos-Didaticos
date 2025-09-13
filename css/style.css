@@ -1,0 +1,81 @@
+body {
+  font-family: "Inter", sans-serif;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.option-button {
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.option-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.option-button.selected {
+  transform: scale(1.05);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Cores para os pilares selecionados */
+.theme-selected {
+  background-color: #2563eb;
+} /* Azul */
+.mechanic-selected {
+  background-color: #16a34a;
+} /* Verde */
+.rule-selected {
+  background-color: #dc2626;
+} /* Vermelho */
+.feedback-selected {
+  background-color: #d97706;
+} /* Amarelo */
+
+/* Efeito de "Juicy Feedback" no fundo da tela */
+body.correct-answer-glow {
+  background-color: #064e3b;
+}
+body.incorrect-answer-glow {
+  background-color: #7f1d1d;
+}
+
+/* Animação de "shake" para respostas incorretas */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Transição suave entre as telas de configuração e jogo */
+#configurator,
+#game-container {
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.hidden-screen {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+}

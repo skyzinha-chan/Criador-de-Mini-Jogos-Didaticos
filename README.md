@@ -1,8 +1,8 @@
 # Criador de Mini-Jogos Didáticos 🎮📖
 <p align="center">
   <img alt="Status do Projeto" src="https://img.shields.io/badge/status-concluído-brightgreen">
-  <img alt="Último Commit" src="https://img.shields.io/github/last-commit/SEU-USUARIO-GITHUB/SEU-REPOSITORIO">
-  <img alt="Licença" src="https://img.shields.io/github/license/SEU-USUARIO-GITHUB/SEU-REPOSITORIO">
+  <img alt="Último Commit" src="https://img.shields.io/github/last-commit/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos">
+  <img alt="Licença" src="https://img.shields.io/github/license/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos">
 </p>
 
 ## Sobre o Projeto
