@@ -79,3 +79,43 @@ body.incorrect-answer-glow {
   position: absolute;
   width: 100%;
 }
+
+/* --- ESTILOS PARA O MENU LATERAL DESLIZANTE --- */
+
+/* Fundo escurecido (overlay) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none; /* Não bloqueia cliques quando escondido */
+}
+
+.overlay.open {
+  opacity: 1;
+  pointer-events: auto; /* Permite cliques (para fechar o menu) */
+}
+
+/* O menu lateral (sidebar) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Começa fora da tela */
+  width: 300px;
+  height: 100%;
+  background-color: #1f2937; /* bg-gray-800 */
+  z-index: 100;
+  transition: right 0.3s ease-in-out;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  right: 0; /* Desliza para dentro da tela */
+}
