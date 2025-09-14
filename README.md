@@ -7,19 +7,19 @@
 
 ## Sobre o Projeto
 
-O Criador de Mini-Jogos Didáticos é uma ferramenta web interativa, desenvolvida como uma atividade prática para a disciplina de Produção de Jogos Educativos. A aplicação, contida em um único arquivo HTML, permite que os usuários projetem coletivamente um protótipo de jogo educacional, tomando decisões baseadas nos quatro pilares essenciais do Game Design.
+O Criador de Mini-Jogos Didáticos é uma ferramenta web interativa, desenvolvida como uma atividade prática para a disciplina de Produção de Jogos Educativos. A aplicação permite que os usuários projetem coletivamente um protótipo de jogo educacional, tomando decisões baseadas nos quatro pilares essenciais do Game Design.
 
 O objetivo é demonstrar de forma prática e colaborativa como Regras, Mecânicas, Feedback e Engajamento se unem para criar uma experiência de aprendizagem funcional e divertida.
 
 ---
 ## 🏛️ Estrutura do Projeto
 
-O projeto é composto por dois artefatos principais:
+O projeto agora é composto por múltiplos arquivos HTML e uma estrutura de módulos JavaScript.
 
 1.  **Ferramenta Web Interativa (`index.html`):** O coração do projeto. Uma aplicação de página única que permite à turma configurar e gerar um protótipo de mini-jogo educacional em tempo real.
 2.  **Artigo de Fundamentação Teórica (`GameDesign.pdf`):** Um documento que explora os fundamentos do design de jogos aplicados ao contexto educacional, analisando os quatro pilares que guiaram o desenvolvimento da ferramenta[cite: 21, 23].
 
-A estrutura de arquivos recomendada para o repositório é:
+A estrutura é:
 
 ```
 ├── 📁 assets/
@@ -28,14 +28,27 @@ A estrutura de arquivos recomendada para o repositório é:
 ├── 📁 docs/
 │   └── 🕹 GameDesign.pdf
 ├── 📁 js/
-│   ├── 📜 main.js         # Ponto de entrada da aplicação, orquestra os módulos.
-│   ├── 📜 ui.js           # Módulo para manipulação do DOM e da interface.
+│   ├── 📜 accessibility.js# Lógica para os recursos de acessibilidade.
+│   ├── 📜 audio.js        # Módulo para controle e reprodução de áudio.
+│   ├── 📜 common.js       # Lógicas comuns a todas as páginas (rodapé).
 │   ├── 📜 configurator.js # Módulo para a lógica da tela de configuração do jogo.
-│   ├── 📜 game.js         # Módulo para a lógica principal do jogo (gameplay).
+│   ├── 📜 data-manager.js # Módulo para carregar e mesclar dados padrão e customizados.
 │   ├── 📜 data.js         # Módulo que armazena os dados do jogo (perguntas, etc).
-│   └── 📜 audio.js        # Módulo para controle e reprodução de áudio.
+│   ├── 📜 feedback.js     # Módulo 
+│   ├── 📜 game.js         # Módulo para a lógica principal do jogo (gameplay).
+│   ├── 📜 main.js         # Ponto de entrada da aplicação, orquestra os módulos.
+│   ├── 📜 mecanicas.js    # Lógica da página de mecânicas.
+│   ├── 📜 nav.js          # Lógica para o menu de navegação lateral.
+│   ├── 📜 regras.js       # Lógica da página de regras.
+│   ├── 📜 teacher-mode.js # Lógica do Modo Professor para adicionar conteúdo.
+│   ├── 📜 tema.js         # Lógica da página de tema.
+│   └── 📜 ui.js           # Módulo para manipulação do DOM e da interface.
 ├── 🚫 .gitignore
 ├── 🌐 index.html
+├── 🌐 tema.html
+├── 🌐 mecanicas.html
+├── 🌐 regras.html
+├── 🌐 feedback.html
 ├── ⚖️ LICENSE
 └── ℹ️ README.md
 
@@ -45,7 +58,10 @@ A estrutura de arquivos recomendada para o repositório é:
 * **Co-criação em Tempo Real:** A turma pode decidir os elementos do jogo de forma interativa.
 * **Visualização dos 4 Pilares:** Escolha opções claras para Tema (Engajamento), Interação (Mecânica), Desafio (Regra) e Comunicação (Feedback).
 * **Geração de Protótipo:** A ferramenta constrói um mini-jogo jogável com base nas escolhas feitas.
+* **Modo Professor:** Uma nova funcionalidade que permite adicionar temas e perguntas personalizadas, que são salvas localmente no navegador do usuário.
+* **Acessibilidade:** Implementação de modo de alto contraste e leitura de perguntas em voz alta usando a Web Speech API.
 * **Design Polido:** Interface com tema escuro, ícones, animações e feedback visual ("juicy feedback") para uma experiência de usuário aprimorada.
+  
 ---
 
 ## 🧩 Responsabilidades dos Módulos JavaScript
@@ -61,7 +77,19 @@ A lógica foi dividida para tornar o código mais legível e fácil de manter:
 
 * `data.js`: A "biblioteca". Um local centralizado para armazenar todo o conteúdo do jogo, como perguntas, respostas e títulos.
 
+* `data-manager.js`: O "curador". Responsável por carregar os dados padrão do jogo e mesclá-los com quaisquer dados personalizados salvos no localStorage (modo professor).* 
+
 * `audio.js`: O "engenheiro de som". Isola a complexidade da Web Audio API para tocar os sons de feedback.
+
+* `nav.js`: O "guia". Gerencia o menu de navegação lateral, permitindo que o usuário mude de tela.
+
+* `common.js`: Importa lógicas compartilhadas, como a renderização do rodapé, para as páginas secundárias.
+
+* `teacher-mode.js`: Controla a interface e a lógica do Modo Professor, permitindo a criação de novos temas e perguntas.
+
+* `accessibility.js`: Implementa as funcionalidades de acessibilidade, como o modo de alto contraste e a síntese de fala.
+
+* `mecanicas.js`, `regras.js`, `tema.js`: Contêm as lógicas específicas para as atividades de cada uma das páginas dos pilares.
 
 ## 🚀 Como Usar e Acessar a Versão Online
 
@@ -124,19 +152,20 @@ Este projeto possui um licenciamento duplo para separar o código-fonte do conte
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/skyzinha-chan">
-        <img src="https://github.com/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos/blob/main/assets/talita-mendonca.jpg?raw=true" width="150px;" alt="Foto de Talita Mendonça Marques" style="border-radius:50%;"/>
-        <br />
-        <sub><b>Talita Mendonça Marques</b></sub>
-      </a>
-    </td>
-    <td align="center">
       <a href="https://github.com/767616/LeonardoVinicius767616">
         <img src="https://github.com/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos/blob/main/assets/leonardo-vinicius.jpg?raw=true" width="150px;" alt="Foto de Leonardo Vinicius da Costa Gomes" style="border-radius:50%;"/>
         <br />
         <sub><b>Leonardo Vinicius da Costa Gomes</b></sub>
       </a>
     </td>
+    <td align="center">
+      <a href="https://github.com/skyzinha-chan">
+        <img src="https://github.com/skyzinha-chan/Criador-de-Mini-Jogos-Didaticos/blob/main/assets/talita-mendonca.jpg?raw=true" width="150px;" alt="Foto de Talita Mendonça Marques" style="border-radius:50%;"/>
+        <br />
+        <sub><b>Talita Mendonça Marques</b></sub>
+      </a>
+    </td>
+    
   </tr>
 </table>
 
