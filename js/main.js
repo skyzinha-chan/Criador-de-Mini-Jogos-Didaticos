@@ -1,8 +1,8 @@
 // Importa a lógica do menu hambúrguer para que funcione em todas as páginas que usam este script.
 import './common.js'
 
-// Importa os dados de conteúdo (pilares, desenvolvedores) do nosso módulo "biblioteca".
-import { pillarData, developerData } from './data.js'
+// Importa a função que carrega e mescla todos os dados do jogo.
+import { loadData } from './data-manager.js'
 
 // Importa as funções de UI, como a que desenha a tela inicial.
 import { initializeUI } from './ui.js'
@@ -13,24 +13,33 @@ import { initializeConfigurator, getGameConfig } from './configurator.js'
 // Importa a função que constrói e inicia o jogo.
 import { buildGame } from './game.js'
 
+// Importa a lógica do novo Modo Professor.
+import { initializeTeacherMode } from './teacher-mode.js'
+
 /**
  * Função principal que inicializa a aplicação na página index.html.
  * Ela orquestra a chamada dos outros módulos na ordem correta.
  */
 function initApp () {
-    // 1. Renderiza a interface inicial (cards dos pilares e dos desenvolvedores),
-    // passando os dados importados do data.js.
+    // 1. Carrega todos os dados do jogo (padrão + personalizados).
+    const { pillarData, questions, themeTitles } = loadData()
+
+    // 2. Renderiza a interface inicial (cards dos pilares),
+    // passando os dados mesclados.
     initializeUI( pillarData )
 
-    // 2. Inicializa a lógica da tela de configuração.
+    // 3. Inicializa a lógica da tela de configuração.
     // Nós passamos para ela uma "função de callback", que é o que deve acontecer
     // quando o usuário finalmente clicar no botão "Construir".
     initializeConfigurator( () => {
-        // 3. Quando o botão é clicado, primeiro pegamos a configuração que o usuário escolheu.
+        // 4. Quando o botão é clicado, primeiro pegamos a configuração que o usuário escolheu.
         const config = getGameConfig()
-        // 4. Em seguida, chamamos a função para construir o jogo com essa configuração.
-        buildGame( config )
+        // 5. Em seguida, chamamos a função para construir o jogo com os dados completos.
+        buildGame( config, questions, themeTitles )
     } )
+
+    // 6. Inicializa a lógica do modal do Modo Professor.
+    initializeTeacherMode()
 }
 
 // Este é um "ouvinte de eventos". Ele garante que todo o código JavaScript
