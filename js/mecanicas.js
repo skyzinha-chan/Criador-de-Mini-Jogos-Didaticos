@@ -1,4 +1,4 @@
-import './nav.js' // Importa a lógica da navegação
+import './common.js' // Importa e executa a lógica do rodapé
 
 const cards = document.querySelectorAll( '.card' )
 const dropZones = document.querySelectorAll( '.drop-zone' )

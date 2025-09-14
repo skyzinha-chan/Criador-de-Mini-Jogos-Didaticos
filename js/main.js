@@ -1,5 +1,5 @@
 // Importa a lógica do menu hambúrguer para que funcione em todas as páginas que usam este script.
-import './nav.js'
+import './common.js'
 
 // Importa os dados de conteúdo (pilares, desenvolvedores) do nosso módulo "biblioteca".
 import { pillarData, developerData } from './data.js'
@@ -20,7 +20,7 @@ import { buildGame } from './game.js'
 function initApp () {
     // 1. Renderiza a interface inicial (cards dos pilares e dos desenvolvedores),
     // passando os dados importados do data.js.
-    initializeUI( pillarData, developerData )
+    initializeUI( pillarData )
 
     // 2. Inicializa a lógica da tela de configuração.
     // Nós passamos para ela uma "função de callback", que é o que deve acontecer

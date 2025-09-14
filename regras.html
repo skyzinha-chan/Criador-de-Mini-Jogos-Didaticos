@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pilar: Mecânicas de Jogo</title>
+        <title>Pilar: Regras do Jogo</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
@@ -21,61 +21,48 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16m-7 6h7">
-                            </path>
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
                     </button>
                 </div>
             </nav>
         </header>
 
+        <!-- Conteúdo Principal -->
         <main class="flex-grow container mx-auto p-6 md:p-8">
             <div class="text-center mb-8">
-                <h1 class="text-4xl font-bold text-green-400">Pilar 2: Mecânicas de Jogo</h1>
-                <p class="mt-2 text-lg text-gray-300">As ações, os "verbos" do jogo. Como o jogador interage com o
-                    mundo?</p>
+                <h1 class="text-4xl font-bold text-red-400">Pilar 3: Regras do Jogo</h1>
+                <p class="mt-2 text-lg text-gray-300">A fundação da experiência. O que o jogador pode (e não pode)
+                    fazer?</p>
             </div>
 
             <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl">
-                <h2 class="text-2xl font-semibold mb-4 text-center">Atividade: Organize as Mecânicas</h2>
-                <p class="text-center text-gray-400 mb-6">Arraste cada mecânica para a categoria que você acha que ela
-                    pertence.</p>
+                <h2 class="text-2xl font-semibold mb-4 text-center">Atividade: O Impacto das Regras</h2>
+                <p class="text-center text-gray-400 mb-6">Ative e desative as regras abaixo e veja como a jogabilidade
+                    muda instantaneamente.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Drop Zones (Categorias) -->
-                    <div class="drop-zone bg-gray-900 p-4 rounded-lg border-2 border-dashed border-gray-700"
-                        data-category="cognitiva">
-                        <h3 class="font-bold text-lg text-center mb-2">🧠 Cognitivas</h3>
-                        <p class="text-xs text-center text-gray-500 mb-4">(Foco em pensar e resolver)</p>
-                    </div>
-                    <div class="drop-zone bg-gray-900 p-4 rounded-lg border-2 border-dashed border-gray-700"
-                        data-category="motora">
-                        <h3 class="font-bold text-lg text-center mb-2">🏃‍♀️ Motoras</h3>
-                        <p class="text-xs text-center text-gray-500 mb-4">(Foco em agilidade e precisão)</p>
-                    </div>
-                    <div class="drop-zone bg-gray-900 p-4 rounded-lg border-2 border-dashed border-gray-700"
-                        data-category="social">
-                        <h3 class="font-bold text-lg text-center mb-2">🤝 Sociais</h3>
-                        <p class="text-xs text-center text-gray-500 mb-4">(Foco em cooperação ou competição)</p>
-                    </div>
+                <!-- Painel de Controle das Regras -->
+                <div id="rules-controls" class="flex justify-center items-center gap-6 mb-6 bg-gray-900 p-4 rounded-lg">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" id="time-rule"
+                            class="form-checkbox h-5 w-5 text-red-500 bg-gray-700 border-gray-600 rounded">
+                        <span>Regra de Tempo</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" id="obstacle-rule"
+                            class="form-checkbox h-5 w-5 text-red-500 bg-gray-700 border-gray-600 rounded">
+                        <span>Regra de Obstáculos</span>
+                    </label>
                 </div>
 
-                <hr class="border-gray-700 my-6">
-
-                <!-- Draggable Cards (Mecânicas) -->
-                <div id="card-container" class="flex flex-wrap justify-center gap-4">
-                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true"
-                        data-category="cognitiva">Resolução de Puzzles</div>
-                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="motora">
-                        Pular Plataformas</div>
-                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="social">
-                        Troca de Itens</div>
-                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true"
-                        data-category="cognitiva">Gerenciar Recursos</div>
-                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="social">
-                        Votação em Grupo</div>
-                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="motora">
-                        Desviar de Obstáculos</div>
+                <!-- "Tela" do Mini-Jogo -->
+                <div id="mini-game-screen"
+                    class="relative w-full h-80 bg-gray-900 rounded-lg border-2 border-gray-700 overflow-hidden">
+                    <div id="game-info" class="absolute top-2 left-2 p-2 bg-black bg-opacity-50 rounded-lg text-sm">
+                        <p>Pontos: <span id="score">0</span></p>
+                        <p id="timer-display" class="hidden">Tempo: <span id="time">10</span>s</p>
+                    </div>
+                    <!-- Os itens do jogo (moedas e obstáculos) serão adicionados aqui pelo JS -->
                 </div>
             </div>
         </main>
@@ -90,10 +77,8 @@
             </div>
         </footer>
 
-        <!-- Overlay do Menu -->
+        <!-- Overlay e Sidebar do Menu (Estrutura Padrão) -->
         <div id="menu-overlay" class="overlay"></div>
-
-        <!-- Menu Lateral (Sidebar) -->
         <aside id="sidebar-menu" class="sidebar">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold">Navegação</h2>
@@ -118,7 +103,7 @@
             </nav>
         </aside>
 
-        <script type="module" src="js/mecanicas.js"></script>
+        <script type="module" src="js/regras.js"></script>
     </body>
 
 </html>
