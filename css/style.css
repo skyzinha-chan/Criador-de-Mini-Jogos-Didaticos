@@ -80,6 +80,11 @@ body.incorrect-answer-glow {
   width: 100%;
 }
 
+/* Animação da Barra de Progresso */
+#progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+
 /* --- ESTILOS PARA O MENU LATERAL DESLIZANTE --- */
 
 /* Fundo escurecido (overlay) */
@@ -198,4 +203,80 @@ body.incorrect-answer-glow {
   font-size: 2rem;
   line-height: 1;
   font-weight: bold;
+}
+
+/* --- ESTILOS PARA ACESSIBILIDADE --- */
+
+/* Estilos do Toggle Switch */
+#high-contrast-toggle[aria-checked="true"] {
+  background-color: #0ea5e9; /* Azul Claro */
+}
+#high-contrast-toggle[aria-checked="true"] > span {
+  transform: translateX(20px);
+}
+
+/* Paleta de Alto Contraste */
+body.high-contrast {
+  background-color: #000000;
+  color: #ffffff;
+}
+.high-contrast header,
+.high-contrast footer,
+.high-contrast .config-header,
+.high-contrast #configurator,
+.high-contrast #game-container,
+.high-contrast .sidebar,
+.high-contrast .teacher-modal {
+  background-color: #000000;
+  border-color: #ffffff;
+}
+.high-contrast .bg-gray-900,
+.high-contrast .bg-gray-700,
+.high-contrast .bg-red-900,
+.high-contrast .bg-green-900 {
+  background-color: #1a1a1a;
+  border: 1px solid #ffffff;
+}
+.high-contrast button,
+.high-contrast .option-button {
+  background-color: #000000;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+}
+.high-contrast button:hover {
+  background-color: #333300;
+}
+.high-contrast .option-button.selected {
+  background-color: #0000ff;
+  border-color: #ffff00;
+  color: #ffffff;
+}
+.high-contrast .text-blue-400,
+.high-contrast .text-green-400,
+.high-contrast .text-red-400,
+.high-contrast .text-yellow-400,
+.high-contrast .text-purple-400 {
+  color: #ffff00;
+}
+
+.high-contrast body.correct-answer-glow {
+  background-color: #003300;
+}
+.high-contrast body.incorrect-answer-glow {
+  background-color: #330000;
+}
+
+/* --- ESTILOS PARA ACESSIBILIDADE DO DRAG-AND-DROP --- */
+
+/* Estilo para o card que está "seguro" pelo teclado */
+.card.holding {
+  outline: 3px dashed #38bdf8; /* Borda azul para indicar seleção */
+  outline-offset: 3px;
+  transform: scale(1.05);
+}
+
+/* Estilo para a zona de drop quando focada */
+.drop-zone:focus {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
 }

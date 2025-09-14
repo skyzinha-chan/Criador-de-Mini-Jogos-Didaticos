@@ -16,29 +16,35 @@ import { buildGame } from './game.js'
 // Importa a lógica do novo Modo Professor.
 import { initializeTeacherMode } from './teacher-mode.js'
 
+// Importa a lógica de Acessibilidade.
+import { initializeAccessibility } from './accessibility.js'
+
 /**
  * Função principal que inicializa a aplicação na página index.html.
  * Ela orquestra a chamada dos outros módulos na ordem correta.
  */
 function initApp () {
-    // 1. Carrega todos os dados do jogo (padrão + personalizados).
+    // 1. Inicializa os controles de acessibilidade PRIMEIRO para que o tema seja aplicado.
+    initializeAccessibility()
+
+    // 2. Carrega todos os dados do jogo (padrão + personalizados).
     const { pillarData, questions, themeTitles } = loadData()
 
-    // 2. Renderiza a interface inicial (cards dos pilares),
+    // 3. Renderiza a interface inicial (cards dos pilares),
     // passando os dados mesclados.
     initializeUI( pillarData )
 
-    // 3. Inicializa a lógica da tela de configuração.
+    // 4. Inicializa a lógica da tela de configuração.
     // Nós passamos para ela uma "função de callback", que é o que deve acontecer
     // quando o usuário finalmente clicar no botão "Construir".
     initializeConfigurator( () => {
-        // 4. Quando o botão é clicado, primeiro pegamos a configuração que o usuário escolheu.
+        // 5. Quando o botão é clicado, primeiro pegamos a configuração que o usuário escolheu.
         const config = getGameConfig()
-        // 5. Em seguida, chamamos a função para construir o jogo com os dados completos.
+        // 6. Em seguida, chamamos a função para construir o jogo com os dados completos.
         buildGame( config, questions, themeTitles )
     } )
 
-    // 6. Inicializa a lógica do modal do Modo Professor.
+    // 7. Inicializa a lógica do modal do Modo Professor.
     initializeTeacherMode()
 }
 
