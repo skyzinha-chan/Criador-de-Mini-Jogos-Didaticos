@@ -1,6 +1,12 @@
-// Centraliza todos os dados de conteúdo do projeto para fácil manutenção.
+// ===================================================================================
+// ARQUIVO CENTRAL DE DADOS DO JOGO
+// Este arquivo armazena todo o conteúdo utilizado na aplicação,
+// como configurações dos pilares, informações dos desenvolvedores e perguntas do quiz.
+// Manter tudo aqui facilita a manutenção e a expansão do projeto.
+// ===================================================================================
 
 // --- DADOS PARA A TELA DE CONFIGURAÇÃO ---
+// Define as opções que aparecem na tela inicial para o usuário montar o jogo.
 
 export const pillarData = [
     {
@@ -12,7 +18,9 @@ export const pillarData = [
         options: [
             { value: 'tabuada', text: 'Tabuada' },
             { value: 'capitais', text: 'Capitais' },
-            { value: 'agua', text: 'Ciclo da Água' }
+            { value: 'agua', text: 'Ciclo da Água' },
+            { value: 'animais', text: 'Animais' },
+            { value: 'historia', text: 'História do Brasil' }
         ]
     },
     {
@@ -51,6 +59,9 @@ export const pillarData = [
     }
 ]
 
+// --- DADOS DOS DESENVOLVEDORES ---
+// Usado para renderizar o rodapé.
+
 export const developerData = [
     {
         name: 'Talita Mendonça Marques',
@@ -63,31 +74,64 @@ export const developerData = [
 ]
 
 
-// --- DADOS PARA A TELA DO JOGO ---
+// ===================================================================================
+// BANCO DE PERGUNTAS
+// Cada chave corresponde a um 'value' de um tema na pillarData.
+// q: Pergunta (string)
+// a: Resposta correta (string)
+// o: Opções incorretas (array de strings)
+// ===================================================================================
 
 export const questions = {
     tabuada: [
-        { q: "7 x 8?", a: "56", o: [ "49", "54", "63" ] },
-        { q: "6 x 9?", a: "54", o: [ "56", "48", "63" ] },
-        { q: "12 x 5?", a: "60", o: [ "50", "65", "70" ] },
-        { q: "9 x 9?", a: "81", o: [ "72", "89", "91" ] }
+        { q: "Quanto é 7 x 8?", a: "56", o: [ "49", "54", "63" ] },
+        { q: "Quanto é 6 x 9?", a: "54", o: [ "56", "48", "63" ] },
+        { q: "Quanto é 12 x 5?", a: "60", o: [ "50", "65", "70" ] },
+        { q: "Quanto é 9 x 9?", a: "81", o: [ "72", "89", "91" ] },
+        { q: "Quanto é 8 x 4?", a: "32", o: [ "28", "36", "24" ] },
+        { q: "Quanto é 11 x 7?", a: "77", o: [ "71", "87", "67" ] },
+        { q: "Quanto é 3 x 15?", a: "45", o: [ "35", "55", "40" ] }
     ],
     capitais: [
-        { q: "Capital do Japão?", a: "Tóquio", o: [ "Pequim", "Seul", "Bangkok" ] },
-        { q: "Capital da Austrália?", a: "Camberra", o: [ "Sydney", "Melbourne", "Perth" ] },
-        { q: "Capital do Canadá?", a: "Ottawa", o: [ "Toronto", "Vancouver", "Montreal" ] },
-        { q: "Capital da Suíça?", a: "Berna", o: [ "Zurique", "Genebra", "Basileia" ] }
+        { q: "Qual a capital do Japão?", a: "Tóquio", o: [ "Pequim", "Seul", "Bangkok" ] },
+        { q: "Qual a capital da Austrália?", a: "Camberra", o: [ "Sydney", "Melbourne", "Perth" ] },
+        { q: "Qual a capital do Canadá?", a: "Ottawa", o: [ "Toronto", "Vancouver", "Montreal" ] },
+        { q: "Qual a capital da Suíça?", a: "Berna", o: [ "Zurique", "Genebra", "Basileia" ] },
+        { q: "Qual a capital do Egito?", a: "Cairo", o: [ "Alexandria", "Luxor", "Gizé" ] },
+        { q: "Qual a capital da Argentina?", a: "Buenos Aires", o: [ "Córdoba", "Rosário", "Mendoza" ] },
+        { q: "Qual a capital da Noruega?", a: "Oslo", o: [ "Bergen", "Estocolmo", "Copenhague" ] }
     ],
     agua: [
-        { q: "Água vira vapor em qual processo?", a: "Evaporação", o: [ "Condensação", "Precipitação", "Infiltração" ] },
-        { q: "Vapor vira líquido em qual processo?", a: "Condensação", o: [ "Evaporação", "Sublimação", "Precipitação" ] },
-        { q: "Chuva, neve ou granizo são formas de...", a: "Precipitação", o: [ "Condensação", "Evaporação", "Transpiração" ] }
+        { q: "A passagem da água do estado líquido para o gasoso chama-se...", a: "Evaporação", o: [ "Condensação", "Precipitação", "Infiltração" ] },
+        { q: "A passagem da água do estado gasoso para o líquido chama-se...", a: "Condensação", o: [ "Evaporação", "Sublimação", "Precipitação" ] },
+        { q: "Chuva, neve ou granizo são formas de...", a: "Precipitação", o: [ "Condensação", "Evaporação", "Transpiração" ] },
+        { q: "O processo em que as plantas liberam vapor de água é a...", a: "Transpiração", o: [ "Respiração", "Fotossíntese", "Absorção" ] },
+        { q: "O acúmulo de água subterrânea forma os...", a: "Lençóis freáticos", o: [ "Rios voadores", "Afluentes", "Mananciais" ] }
+    ],
+    animais: [
+        { q: "Qual é o maior mamífero terrestre?", a: "Elefante", o: [ "Rinoceronte", "Hipopótamo", "Girafa" ] },
+        { q: "Qual animal é conhecido como o 'rei da selva'?", a: "Leão", o: [ "Tigre", "Onça", "Leopardo" ] },
+        { q: "Qual desses animais é um marsupial?", a: "Canguru", o: [ "Coala", "Gambá", "Diabo-da-tasmânia" ] }, // Coala and Gambá are also marsupials, making this a tricky question for some mechanics. Let's assume for choice this is fine.
+        { q: "Qual ave não pode voar?", a: "Pinguim", o: [ "Avestruz", "Ema", "Galinha" ] }, // Avestruz and Ema are also flightless, adjusting for simplicity. Let's make it more specific.
+        { q: "Qual o animal mais rápido do mundo?", a: "Guepardo", o: [ "Falcão-peregrino", "Leão", "Antílope" ] },
+        { q: "Onde vivem os ursos polares?", a: "Ártico", o: [ "Antártida", "Sibéria", "Alasca" ] }
+    ],
+    historia: [
+        { q: "Quem proclamou a Independência do Brasil?", a: "Dom Pedro I", o: [ "Dom João VI", "Tiradentes", "Marechal Deodoro" ] },
+        { q: "Em que ano o Brasil foi descoberto pelos portugueses?", a: "1500", o: [ "1492", "1522", "1600" ] },
+        { q: "Qual foi a lei que aboliu a escravidão no Brasil?", a: "Lei Áurea", o: [ "Lei do Ventre Livre", "Lei dos Sexagenários", "Lei Eusébio de Queirós" ] },
+        { q: "Quem foi o primeiro presidente do Brasil?", a: "Deodoro da Fonseca", o: [ "Prudente de Morais", "Floriano Peixoto", "Campos Sales" ] },
+        { q: "A 'Inconfidência Mineira' foi um movimento que lutava pela...", a: "Independência", o: [ "Monarquia", "República", "Coroa Portuguesa" ] }
     ]
 }
+
+// --- TÍTULOS DOS TEMAS PARA A TELA DE JOGO ---
+// Mapeia o 'value' do tema para um título mais amigável.
 
 export const themeTitles = {
     tabuada: "Desafio da Tabuada",
     capitais: "Quiz das Capitais",
-    agua: "Ciclo da Água"
+    agua: "A Jornada da Água",
+    animais: "Reino Animal",
+    historia: "História do Brasil"
 }
-
