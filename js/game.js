@@ -1,5 +1,7 @@
 import { uiElements, switchScreen, showFeedback, updateStats, showEndGameScreen } from './ui.js'
 import { playSound } from './audio.js'
+// Importa a função para configurar o botão de áudio.
+import { setupTextToSpeech } from './accessibility.js'
 
 let currentConfig
 let currentQuestionSet, currentQuestion, lives, timer, timerInterval, score, mistakesMade, highScore
@@ -54,6 +56,8 @@ function startTimer () {
 function endGame ( isWin ) {
     clearInterval( timerInterval )
     document.body.classList.remove( 'correct-answer-glow', 'incorrect-answer-glow' )
+
+    document.getElementById( 'speak-question-btn' ).style.display = 'none' // Esconde o botão de áudio
 
     // Lógica de Recorde (High Score)
     if ( score > highScore ) {
@@ -136,7 +140,10 @@ function nextQuestion () {
     }
     const questionIndex = Math.floor( Math.random() * currentQuestionSet.length )
     currentQuestion = currentQuestionSet.splice( questionIndex, 1 )[ 0 ]
-    uiElements.questionArea.textContent = currentQuestion.q
+
+    // Atualiza o texto da pergunta e ativa o botão de fala
+    uiElements.questionText.textContent = currentQuestion.q
+    setupTextToSpeech( currentQuestion.q )
 
     const options = [ ...currentQuestion.o, currentQuestion.a ].sort( () => Math.random() - 0.5 )
     uiElements.answerArea.className = 'mt-8'

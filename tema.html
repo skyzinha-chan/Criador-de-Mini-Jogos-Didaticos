@@ -14,12 +14,13 @@
 
         <!-- Header da Barra de Navegação -->
         <header class="bg-gray-800 shadow-lg sticky top-0 z-40">
-            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center" aria-label="Navegação principal">
                 <a href="index.html" class="text-xl font-bold text-white">🎮 Criador de Jogos</a>
                 <div>
-                    <button id="menu-btn" class="text-white focus:outline-none">
+                    <button type="button" id="menu-btn" class="text-white focus:outline-none"
+                        aria-label="Abrir menu de navegação">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
@@ -30,35 +31,36 @@
 
         <!-- Conteúdo Principal -->
         <main class="flex-grow container mx-auto p-6 md:p-8">
-            <div class="text-center mb-8">
+            <section class="text-center mb-8" aria-labelledby="page-title">
                 <h1 class="text-4xl font-bold text-blue-400">Pilar 1: Tema (Engajamento)</h1>
                 <p class="mt-2 text-lg text-gray-300">O coração do jogo. Qual é a história ou o objetivo que cativa o
                     jogador?</p>
-            </div>
+            </section>
 
-            <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl">
+            <section class="bg-gray-800 p-6 rounded-2xl shadow-2xl" aria-labelledby="activity-title">
                 <h2 class="text-2xl font-semibold mb-4 text-center">Atividade: Adivinhe o Tema</h2>
                 <p class="text-center text-gray-400 mb-6">Clique nos temas abaixo para revelar um exemplo de jogo. O
                     tema conecta a mecânica a um propósito.</p>
 
                 <div id="theme-options" class="flex justify-center flex-wrap gap-4 mb-8">
-                    <button data-theme="Tabuada"
+                    <button type="button" data-theme="Tabuada"
                         class="theme-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Tabuada</button>
-                    <button data-theme="Capitais"
+                    <button type="button" data-theme="Capitais"
                         class="theme-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Capitais</button>
-                    <button data-theme="Ciclo da Água"
+                    <button type="button" data-theme="Ciclo da Água"
                         class="theme-button bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Ciclo
                         da Água</button>
                 </div>
 
                 <div id="theme-display"
-                    class="relative w-full h-80 bg-gray-900 rounded-lg border-2 border-gray-700 flex items-center justify-center p-4 text-center transition-opacity duration-500 opacity-0">
+                    class="relative w-full h-80 bg-gray-900 rounded-lg border-2 border-gray-700 flex items-center justify-center p-4 text-center transition-opacity duration-500 opacity-0"
+                    aria-live="polite">
                     <div id="theme-content">
-                        <h3 id="theme-title" class="text-2xl font-bold text-yellow-400 mb-2"></h3>
+                        <h3 id="theme-title" class="text-2xl font-bold text-yellow-400 mb-2">&nbsp;</h3>
                         <p id="theme-description" class="text-gray-300"></p>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
 
         <!-- FOOTER GLOBAL -->
@@ -75,15 +77,16 @@
         <aside id="sidebar-menu" class="sidebar">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold">Navegação</h2>
-                <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                <button type="button" id="close-menu-btn" class="text-gray-400 hover:text-white"
+                    aria-label="Fechar menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
                 </button>
             </div>
-            <nav class="flex flex-col space-y-2">
+            <nav class="flex flex-col space-y-2" aria-label="Navegação dos pilares">
                 <a href="index.html" class="block py-2 px-4 rounded-md text-blue-400 bg-gray-700">Página Principal
                 </a>
                 <a href="tema.html" class="block py-2 px-4 rounded-md text-gray-300 hover:bg-gray-700">Pilar: Tema</a>

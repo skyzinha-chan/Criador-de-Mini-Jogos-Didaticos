@@ -8,6 +8,7 @@ export const uiElements = {
     gameTitle: document.getElementById( 'game-title' ),
     gameStats: document.getElementById( 'game-stats' ),
     questionArea: document.getElementById( 'question-area' ),
+    questionText: document.getElementById( 'question-text' ),
     answerArea: document.getElementById( 'answer-area' ),
     feedbackMessage: document.getElementById( 'feedback-message' ),
     appContainer: document.getElementById( 'app-container' ),

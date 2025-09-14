@@ -14,12 +14,13 @@
 
         <!-- Header da Barra de Navegação -->
         <header class="bg-gray-800 shadow-lg sticky top-0 z-40">
-            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center" aria-label="Navegação principal">
                 <a href="index.html" class="text-xl font-bold text-white">🎮 Criador de Jogos</a>
                 <div>
-                    <button id="menu-btn" class="text-white focus:outline-none">
+                    <button type="button" id="menu-btn" class="text-white focus:outline-none"
+                        aria-label="Abrir menu de navegação">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
@@ -30,19 +31,21 @@
 
         <!-- Conteúdo Principal -->
         <main class="flex-grow container mx-auto p-6 md:p-8">
-            <div class="text-center mb-8">
+            <section class="text-center mb-8" aria-labelledby="page-title">
                 <h1 class="text-4xl font-bold text-red-400">Pilar 3: Regras do Jogo</h1>
                 <p class="mt-2 text-lg text-gray-300">A fundação da experiência. O que o jogador pode (e não pode)
                     fazer?</p>
-            </div>
+            </section>
 
-            <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl">
+            <section class="bg-gray-800 p-6 rounded-2xl shadow-2xl" aria-labelledby="activity-title">
                 <h2 class="text-2xl font-semibold mb-4 text-center">Atividade: O Impacto das Regras</h2>
                 <p class="text-center text-gray-400 mb-6">Ative e desative as regras abaixo e veja como a jogabilidade
                     muda instantaneamente.</p>
 
                 <!-- Painel de Controle das Regras -->
-                <div id="rules-controls" class="flex justify-center items-center gap-6 mb-6 bg-gray-900 p-4 rounded-lg">
+                <fieldset id="rules-controls"
+                    class="flex justify-center items-center gap-6 mb-6 bg-gray-900 p-4 rounded-lg">
+                    <legend class="sr-only">Controle das regras do jogo</legend>
                     <label class="flex items-center space-x-2 cursor-pointer">
                         <input type="checkbox" id="time-rule"
                             class="form-checkbox h-5 w-5 text-red-500 bg-gray-700 border-gray-600 rounded">
@@ -53,7 +56,7 @@
                             class="form-checkbox h-5 w-5 text-red-500 bg-gray-700 border-gray-600 rounded">
                         <span>Regra de Obstáculos</span>
                     </label>
-                </div>
+                </fieldset>
 
                 <!-- "Tela" do Mini-Jogo -->
                 <div id="mini-game-screen"
@@ -64,7 +67,7 @@
                     </div>
                     <!-- Os itens do jogo (moedas e obstáculos) serão adicionados aqui pelo JS -->
                 </div>
-            </div>
+            </section>
         </main>
 
         <!-- FOOTER GLOBAL -->
@@ -82,15 +85,16 @@
         <aside id="sidebar-menu" class="sidebar">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold">Navegação</h2>
-                <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                <button type="button" id="close-menu-btn" class="text-gray-400 hover:text-white"
+                    aria-label="Fechar menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
                 </button>
             </div>
-            <nav class="flex flex-col space-y-2">
+            <nav class="flex flex-col space-y-2" aria-label="Navegação dos pilares">
                 <a href="index.html" class="block py-2 px-4 rounded-md text-blue-400 bg-gray-700">Página Principal
                 </a>
                 <a href="tema.html" class="block py-2 px-4 rounded-md text-gray-300 hover:bg-gray-700">Pilar: Tema</a>

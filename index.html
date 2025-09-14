@@ -19,12 +19,13 @@
 
         <!-- Header da Barra de Navegação -->
         <header class="bg-gray-800 shadow-lg sticky top-0 z-40">
-            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center" aria-label="Navegação principal">
                 <a href="index.html" class="text-xl font-bold text-white">🎮 Criador de Jogos</a>
                 <div>
-                    <button id="menu-btn" class="text-white focus:outline-none">
+                    <button type="button" id="menu-btn" class="text-white focus:outline-none"
+                        aria-label="Abrir menu de navegação">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 6h16M4 12h16m-7 6h7">
                             </path>
@@ -39,30 +40,31 @@
             <!-- O container do seu app -->
             <div id="app-container" class="w-full max-w-4xl relative">
                 <!-- TELA DE CONFIGURAÇÃO -->
-                <div id="configurator" class="space-y-6 p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl">
-
-                    <header class="text-center mb-6">
-                        <h1 class="text-3xl md:text-4xl font-bold text-white">Criador de Mini-Jogos Didáticos
+                <section id="configurator" class="space-y-6 p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl"
+                    aria-labelledby="config-title">
+                    <div class="text-center mb-6 config-header">
+                        <h1 id="config-title" class="text-3xl md:text-4xl font-bold text-white">Criador de Mini-Jogos
+                            Didáticos
                         </h1>
                         <p class="mt-2 text-lg text-gray-300">Atividade Interativa para a Turma</p>
                         <p class="mt-4 text-base text-gray-400">Vamos projetar um jogo juntos! A turma decide, e
                             nós
                             construímos. Escolham uma opção em cada categoria para definirmos os pilares do
                             nosso jogo.</p>
-                    </header>
+                    </div>
 
-                    <main>
+                    <div>
                         <!-- Barra de Progresso -->
                         <div class="w-full bg-gray-700 rounded-full h-2.5 mb-6">
-                            <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full"
-                                style="width: 0%; transition: width 0.5s;"></div>
+                            <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full" role="progressbar"
+                                aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
                         </div>
 
                         <!-- Os cards dos pilares serão inseridos aqui pelo ui.js -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 
                         <div class="mt-8 text-center">
-                            <button id="build-button"
+                            <button type="button" id="build-button"
                                 class="w-full md:w-auto bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-700 transition-all disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center mx-auto"
                                 disabled>
                                 🎮 Construir Protótipo do Jogo 🕹️!
@@ -70,17 +72,19 @@
                         </div>
                         <!-- Botão para o Modo Professor -->
                         <div class="mt-6 text-center">
-                            <button id="teacher-mode-btn"
+                            <button type="button" id="teacher-mode-btn"
                                 class="w-full md:w-auto bg-purple-600 text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-purple-700 transition-all">
                                 Modo Professor 🧑‍🏫
                             </button>
                         </div>
-                    </main>
+                    </div>
 
-                </div>
+                </section>
 
                 <!-- TELA DO JOGO -->
-                <div id="game-container" class="p-8 bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl hidden-screen">
+                <section id="game-container"
+                    class="p-8 bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl hidden-screen"
+                    aria-labelledby="game-title">
                     <!-- Visão do Jogo Ativo -->
                     <div id="game-active-view">
                         <div class="flex justify-between items-center mb-6">
@@ -88,10 +92,21 @@
                             <div id="game-stats" class="flex items-center space-x-4 text-xl"></div>
                         </div>
                         <div id="question-area"
-                            class="text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+                            class="relative text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+                            <span id="question-text"></span>
+                            <button type="button" id="speak-question-btn"
+                                class="absolute top-2 right-2 p-2 text-gray-400 hover:text-white"
+                                aria-label="Ler pergunta em voz alta" style="display: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                </svg>
+                            </button>
                         </div>
                         <div id="answer-area" class="mt-8"></div>
-                        <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                        <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8" aria-live="polite">
+                        </div>
                     </div>
 
                     <!-- Tela de Fim de Jogo -->
@@ -108,11 +123,11 @@
                                 <p id="end-game-highscore" class="text-2xl font-semibold text-yellow-400">0</p>
                             </div>
                         </div>
-                        <button id="restart-button"
+                        <button type="button" id="restart-button"
                             class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold">Jogar
                             Novamente</button>
                     </div>
-                </div>
+                </section>
 
             </div>
         </main>
@@ -129,19 +144,22 @@
 
         <!-- Modal do Modo Professor -->
         <div id="teacher-modal-overlay" class="teacher-modal-overlay hidden"></div>
-        <div id="teacher-modal" class="teacher-modal hidden">
+        <div id="teacher-modal" class="teacher-modal hidden" role="dialog" aria-modal="true"
+            aria-labelledby="teacher-modal-title">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-purple-400">Modo Professor</h2>
-                <button id="close-teacher-modal-btn" class="text-gray-400 hover:text-white">&times;</button>
+                <h2 id="teacher-modal-title" class="text-2xl font-bold text-purple-400">Modo Professor</h2>
+                <button type="button" id="close-teacher-modal-btn" class="text-gray-400 hover:text-white"
+                    aria-label="Fechar modal">&times;</button>
             </div>
 
             <!-- Seção de Adicionar Tema -->
             <div class="bg-gray-900 p-4 rounded-lg mb-6">
                 <h3 class="text-lg font-semibold mb-2">Adicionar Novo Tema</h3>
                 <div class="flex gap-2">
+                    <label for="new-theme-name" class="sr-only">Nome do Novo Tema</label>
                     <input type="text" id="new-theme-name" placeholder="Nome do Tema (ex: Tabela Periódica)"
                         class="w-full bg-gray-800 p-2 rounded-lg text-white">
-                    <button id="save-theme-btn"
+                    <button type="button" id="save-theme-btn"
                         class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Salvar</button>
                 </div>
             </div>
@@ -150,25 +168,37 @@
             <div class="bg-gray-900 p-4 rounded-lg">
                 <h3 class="text-lg font-semibold mb-2">Adicionar Nova Pergunta</h3>
                 <div class="space-y-3">
-                    <select id="question-theme-select" class="w-full bg-gray-800 p-2 rounded-lg text-white">
+                    <label for="question-theme-select" class="sr-only">Selecione um tema para a nova pergunta</label>
+                    <select id="question-theme-select" class="w-full bg-gray-800 p-2 rounded-lg text-white"
+                        aria-label="Selecione um tema para adicionar a pergunta">
                         <option>Selecione um tema</option>
                     </select>
+                    <label for="new-question-text" class="sr-only">Texto da nova pergunta</label>
                     <input type="text" id="new-question-text" placeholder="Texto da pergunta"
                         class="w-full bg-gray-800 p-2 rounded-lg text-white">
+
+                    <label for="new-question-answer" class="sr-only">Resposta correta</label>
                     <input type="text" id="new-question-answer" placeholder="Resposta Correta"
                         class="w-full bg-green-900 p-2 rounded-lg text-white">
+
+                    <label for="new-question-option1" class="sr-only">Opção incorreta 1</label>
                     <input type="text" id="new-question-option1" placeholder="Opção Incorreta 1"
                         class="w-full bg-red-900 p-2 rounded-lg text-white">
+
+                    <label for="new-question-option2" class="sr-only">Opção incorreta 2</label>
                     <input type="text" id="new-question-option2" placeholder="Opção Incorreta 2"
                         class="w-full bg-red-900 p-2 rounded-lg text-white">
+
+                    <label for="new-question-option3" class="sr-only">Opção incorreta 3</label>
                     <input type="text" id="new-question-option3" placeholder="Opção Incorreta 3"
                         class="w-full bg-red-900 p-2 rounded-lg text-white">
-                    <button id="save-question-btn"
+
+                    <button type="button" id="save-question-btn"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Salvar
                         Pergunta</button>
                 </div>
             </div>
-            <p id="teacher-modal-feedback" class="text-center mt-4 h-5 text-green-400"></p>
+            <p id="teacher-modal-feedback" class="text-center mt-4 h-5 text-green-400" aria-live="polite"></p>
         </div>
 
         <!-- Overlay do Menu -->
@@ -178,15 +208,16 @@
         <aside id="sidebar-menu" class="sidebar">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold">Navegação</h2>
-                <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                <button type="button" id="close-menu-btn" class="text-gray-400 hover:text-white"
+                    aria-label="Fechar menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
                     </svg>
                 </button>
             </div>
-            <nav class="flex flex-col space-y-2">
+            <nav class="flex flex-col space-y-2" aria-label="Navegação dos pilares">
                 <a href="index.html" class="block py-2 px-4 rounded-md text-blue-400 bg-gray-700">Página Principal
                 </a>
                 <a href="tema.html" class="block py-2 px-4 rounded-md text-gray-300 hover:bg-gray-700">Pilar: Tema</a>
@@ -197,6 +228,20 @@
                 <a href="feedback.html" class="block py-2 px-4 rounded-md text-gray-300 hover:bg-gray-700">Pilar:
                     Feedback</a>
             </nav>
+            <!-- Controles de Acessibilidade -->
+            <div class="mt-auto pt-4 border-t border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-400 mb-2">Acessibilidade</h3>
+                <div class="flex items-center justify-between">
+                    <label id="high-contrast-label" for="high-contrast-toggle" class="cursor-pointer">Alto
+                        Contraste</label>
+                    <button type="button" id="high-contrast-toggle" role="switch" aria-checked="false"
+                        aria-labelledby="high-contrast-label"
+                        class="relative inline-flex items-center h-6 rounded-full w-11 bg-gray-600">
+                        <span class="inline-block w-4 h-4 transform bg-white rounded-full transition-transform"
+                            aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </aside>
 
         <!-- Ponto de entrada principal para a lógica JavaScript -->
