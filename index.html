@@ -74,19 +74,39 @@
 
                 <!-- TELA DO JOGO -->
                 <div id="game-container" class="p-8 bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl hidden-screen">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 id="game-title" class="text-2xl font-bold text-blue-400">Jogando...</h2>
-                        <div id="game-stats" class="flex items-center space-x-4 text-xl"></div>
+                    <!-- Visão do Jogo Ativo -->
+                    <div id="game-active-view">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 id="game-title" class="text-2xl font-bold text-blue-400">Jogando...</h2>
+                            <div id="game-stats" class="flex items-center space-x-4 text-xl"></div>
+                        </div>
+                        <div id="question-area"
+                            class="text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+                        </div>
+                        <div id="answer-area" class="mt-8"></div>
+                        <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8"></div>
                     </div>
-                    <div id="question-area"
-                        class="text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+
+                    <!-- Tela de Fim de Jogo -->
+                    <div id="end-game-screen" class="hidden text-center">
+                        <h2 id="end-game-title" class="text-4xl font-bold mb-4">Fim de Jogo!</h2>
+                        <div id="end-game-medal" class="text-8xl mb-4 animate-bounce"></div>
+                        <div class="bg-gray-900 p-6 rounded-lg space-y-4">
+                            <div>
+                                <p class="text-gray-400 text-lg">Sua Pontuação</p>
+                                <p id="end-game-score" class="text-5xl font-bold text-white">0</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Recorde</p>
+                                <p id="end-game-highscore" class="text-2xl font-semibold text-yellow-400">0</p>
+                            </div>
+                        </div>
+                        <button id="restart-button"
+                            class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold">Jogar
+                            Novamente</button>
                     </div>
-                    <div id="answer-area" class="mt-8"></div>
-                    <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8"></div>
-                    <button id="restart-button"
-                        class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold hidden">Jogar
-                        Novamente</button>
                 </div>
+
             </div>
         </main>
 

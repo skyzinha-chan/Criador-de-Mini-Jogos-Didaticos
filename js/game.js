@@ -1,9 +1,9 @@
-import { uiElements, switchScreen, showFeedback, updateStats } from './ui.js'
+import { uiElements, switchScreen, showFeedback, updateStats, showEndGameScreen } from './ui.js'
 import { questions, themeTitles } from './data.js'
 import { playSound } from './audio.js'
 
 let currentConfig
-let currentQuestionSet, currentQuestion, lives, timer, timerInterval
+let currentQuestionSet, currentQuestion, lives, timer, timerInterval, score, mistakesMade, highScore
 
 /**
  * Inicia a construção e o estado inicial do jogo.
@@ -13,9 +13,13 @@ export function buildGame ( config ) {
     currentConfig = config
     switchScreen( 'game' )
 
-    uiElements.restartButton.classList.add( 'hidden' )
     currentQuestionSet = [ ...questions[ currentConfig.theme ] ]
     uiElements.gameTitle.textContent = themeTitles[ currentConfig.theme ]
+
+    // Inicializa o estado do jogo
+    score = 0
+    mistakesMade = 0
+    highScore = localStorage.getItem( 'highScore' ) || 0
 
     if ( currentConfig.rule === 'lives' ) lives = 3
     if ( currentConfig.rule === 'time' ) timer = 15
@@ -42,16 +46,38 @@ function startTimer () {
 }
 
 /**
- * Finaliza o jogo e exibe a tela de vitória ou derrota.
+ * Finaliza o jogo, calcula os resultados e exibe a tela de finalização.
  * @param {boolean} isWin - Se o jogador venceu.
  */
 function endGame ( isWin ) {
     clearInterval( timerInterval )
     document.body.classList.remove( 'correct-answer-glow', 'incorrect-answer-glow' )
-    uiElements.answerArea.innerHTML = ''
-    uiElements.questionArea.textContent = isWin ? "Parabéns, você completou o desafio!" : "Fim de Jogo!"
-    showFeedback( isWin ? "Excelente trabalho!" : "Mais sorte da próxima vez!", isWin ? 'win' : 'lose' )
-    uiElements.restartButton.classList.remove( 'hidden' )
+
+    // Lógica de Recorde (High Score)
+    if ( score > highScore ) {
+        highScore = score
+        localStorage.setItem( 'highScore', highScore )
+    }
+
+    // Lógica de Medalhas
+    let medal = ''
+    if ( isWin ) {
+        if ( mistakesMade === 0 ) {
+            medal = '🥇' // Ouro: Nenhuma vida perdida ou erro.
+        } else if ( ( currentConfig.rule === 'lives' && lives >= 2 ) || ( currentConfig.rule === 'time' && mistakesMade <= 2 ) ) {
+            medal = '🥈' // Prata: Poucos erros.
+        } else {
+            medal = '🥉' // Bronze: Apenas por completar.
+        }
+    }
+
+    // Chama a função da UI para mostrar a tela final
+    showEndGameScreen( {
+        isWin: isWin,
+        score: score,
+        highScore: highScore,
+        medal: medal,
+    } )
 }
 
 /**
@@ -67,8 +93,15 @@ function handleAnswer ( isCorrect, timeOut = false ) {
     playSound( isCorrect ? 'correct' : 'incorrect', currentConfig.feedback )
 
     if ( isCorrect ) {
-        showFeedback( "Correto!", 'correct' )
+        // Lógica de Pontuação
+        let points = 100 // Pontos base
+        if ( currentConfig.rule === 'time' && timer > 0 ) {
+            points += timer * 10 // Bônus por tempo restante
+        }
+        score += points
+        showFeedback( `Correto! +${ points } pontos`, 'correct' )
     } else {
+        mistakesMade++
         uiElements.answerArea.classList.add( 'shake-animation' )
         const feedbackText = timeOut ? "Tempo esgotado!" : `Incorreto! A resposta era: ${ currentQuestion.a }`
         showFeedback( feedbackText, 'incorrect' )
@@ -76,7 +109,7 @@ function handleAnswer ( isCorrect, timeOut = false ) {
             lives--
             updateStats( currentConfig.rule, { lives } )
             if ( lives <= 0 ) {
-                setTimeout( () => endGame( false ), 500 )
+                setTimeout( () => endGame( false ), 2500 )
                 return
             }
         }

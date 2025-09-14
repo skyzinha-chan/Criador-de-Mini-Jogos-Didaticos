@@ -11,6 +11,13 @@ export const uiElements = {
     answerArea: document.getElementById( 'answer-area' ),
     feedbackMessage: document.getElementById( 'feedback-message' ),
     appContainer: document.getElementById( 'app-container' ),
+    // Elementos da tela de jogo e fim de jogo
+    gameActiveView: document.getElementById( 'game-active-view' ),
+    endGameScreen: document.getElementById( 'end-game-screen' ),
+    endGameTitle: document.getElementById( 'end-game-title' ),
+    endGameMedal: document.getElementById( 'end-game-medal' ),
+    endGameScore: document.getElementById( 'end-game-score' ),
+    endGameHighscore: document.getElementById( 'end-game-highscore' ),
 }
 
 /**
@@ -20,6 +27,9 @@ export const uiElements = {
 export function switchScreen ( screenName ) {
     if ( screenName === 'game' ) {
         uiElements.configurator.classList.add( 'hidden-screen' )
+        // Garante que a visão correta do jogo é mostrada ao iniciar
+        uiElements.gameActiveView.classList.remove( 'hidden' )
+        uiElements.endGameScreen.classList.add( 'hidden' )
         setTimeout( () => {
             uiElements.gameContainer.classList.remove( 'hidden-screen' )
         }, 100 )
@@ -66,6 +76,29 @@ export function updateStats ( rule, data ) {
         uiElements.gameStats.innerHTML = `<div class="text-yellow-400 text-2xl font-mono">${ String( data.timer ).padStart( 2, '0' ) }s</div>`
     }
 }
+
+
+/**
+ * Exibe a tela de final de jogo com os resultados.
+ * @param {object} results - Objeto com os resultados do jogo.
+ * @param {boolean} results.isWin - Se o jogador venceu.
+ * @param {number} results.score - A pontuação final.
+ * @param {number} results.highScore - O recorde.
+ * @param {string} results.medal - O emoji da medalha.
+ */
+export function showEndGameScreen ( results ) {
+    uiElements.gameActiveView.classList.add( 'hidden' )
+
+    uiElements.endGameTitle.textContent = results.isWin ? "Parabéns, você venceu!" : "Fim de Jogo!"
+    uiElements.endGameTitle.className = `text-4xl font-bold mb-4 ${ results.isWin ? 'text-green-400' : 'text-red-400' }`
+
+    uiElements.endGameMedal.textContent = results.medal
+    uiElements.endGameScore.textContent = results.score
+    uiElements.endGameHighscore.textContent = results.highScore
+
+    uiElements.endGameScreen.classList.remove( 'hidden' )
+}
+
 
 /**
  * Insere dinamicamente os elementos de UI que não mudam, como os pilares.
