@@ -159,3 +159,43 @@ body.incorrect-answer-glow {
 #play-again-btn {
   transition: background-color 0.2s ease-in-out;
 }
+
+/* --- ESTILOS PARA O MODAL DO MODO PROFESSOR --- */
+.teacher-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 199; /* Abaixo do modal, acima do resto */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.teacher-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: #1f2937; /* bg-gray-800 */
+  padding: 1.5rem;
+  border-radius: 1rem;
+  z-index: 200;
+  border: 1px solid #374151; /* bg-gray-700 */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.teacher-modal.hidden,
+.teacher-modal-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#close-teacher-modal-btn {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: bold;
+}

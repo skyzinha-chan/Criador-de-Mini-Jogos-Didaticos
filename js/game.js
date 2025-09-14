@@ -1,5 +1,4 @@
 import { uiElements, switchScreen, showFeedback, updateStats, showEndGameScreen } from './ui.js'
-import { questions, themeTitles } from './data.js'
 import { playSound } from './audio.js'
 
 let currentConfig
@@ -8,11 +7,14 @@ let currentQuestionSet, currentQuestion, lives, timer, timerInterval, score, mis
 /**
  * Inicia a construção e o estado inicial do jogo.
  * @param {object} config - O objeto de configuração vindo do configurator.
+ * @param {object} questions - O objeto completo com todas as perguntas (padrão + custom).
+ * @param {object} themeTitles - O objeto completo com todos os títulos de temas.
  */
-export function buildGame ( config ) {
+export function buildGame ( config, questions, themeTitles ) {
     currentConfig = config
     switchScreen( 'game' )
 
+    // Usa os dados recebidos para iniciar o jogo
     currentQuestionSet = [ ...questions[ currentConfig.theme ] ]
     uiElements.gameTitle.textContent = themeTitles[ currentConfig.theme ]
 
