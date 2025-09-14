@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pilar: Mecânicas de Jogo</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body class="bg-gray-900 text-white flex flex-col min-h-screen">
+
+        <!-- Header da Barra de Navegação -->
+        <header class="bg-gray-800 shadow-lg sticky top-0 z-40">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold text-white">🎮 Criador de Jogos</a>
+                <div>
+                    <button id="menu-btn" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <main class="flex-grow container mx-auto p-6 md:p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-green-400">Pilar 2: Mecânicas de Jogo</h1>
+                <p class="mt-2 text-lg text-gray-300">As ações, os "verbos" do jogo. Como o jogador interage com o
+                    mundo?</p>
+            </div>
+
+            <div class="bg-gray-800 p-6 rounded-2xl shadow-2xl">
+                <h2 class="text-2xl font-semibold mb-4 text-center">Atividade: Organize as Mecânicas</h2>
+                <p class="text-center text-gray-400 mb-6">Arraste cada mecânica para a categoria que você acha que ela
+                    pertence.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Drop Zones (Categorias) -->
+                    <div class="drop-zone bg-gray-900 p-4 rounded-lg border-2 border-dashed border-gray-700"
+                        data-category="cognitiva">
+                        <h3 class="font-bold text-lg text-center mb-2">🧠 Cognitivas</h3>
+                        <p class="text-xs text-center text-gray-500 mb-4">(Foco em pensar e resolver)</p>
+                    </div>
+                    <div class="drop-zone bg-gray-900 p-4 rounded-lg border-2 border-dashed border-gray-700"
+                        data-category="motora">
+                        <h3 class="font-bold text-lg text-center mb-2">🏃‍♀️ Motoras</h3>
+                        <p class="text-xs text-center text-gray-500 mb-4">(Foco em agilidade e precisão)</p>
+                    </div>
+                    <div class="drop-zone bg-gray-900 p-4 rounded-lg border-2 border-dashed border-gray-700"
+                        data-category="social">
+                        <h3 class="font-bold text-lg text-center mb-2">🤝 Sociais</h3>
+                        <p class="text-xs text-center text-gray-500 mb-4">(Foco em cooperação ou competição)</p>
+                    </div>
+                </div>
+
+                <hr class="border-gray-700 my-6">
+
+                <!-- Draggable Cards (Mecânicas) -->
+                <div id="card-container" class="flex flex-wrap justify-center gap-4">
+                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true"
+                        data-category="cognitiva">Resolução de Puzzles</div>
+                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="motora">
+                        Pular Plataformas</div>
+                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="social">
+                        Troca de Itens</div>
+                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true"
+                        data-category="cognitiva">Gerenciar Recursos</div>
+                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="social">
+                        Votação em Grupo</div>
+                    <div class="card bg-green-600 p-3 rounded-lg cursor-grab" draggable="true" data-category="motora">
+                        Desviar de Obstáculos</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Overlay do Menu -->
+        <div id="menu-overlay" class="overlay"></div>
+
+        <!-- Menu Lateral (Sidebar) -->
+        <aside id="sidebar-menu" class="sidebar">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold">Navegação</h2>
+                <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-2">
+                <a href="index.html" class="block py-2 px-4 rounded-md text-gray-300 hover:bg-gray-700">Criador
+                    Interativo</a>
+                <a href="mecanicas.html" class="block py-2 px-4 rounded-md text-green-400 bg-gray-700">Pilar:
+                    Mecânicas</a>
+                <a href="#" class="block py-2 px-4 rounded-md text-gray-500 cursor-not-allowed">Pilar: Regras (Em
+                    breve)</a>
+                <a href="#" class="block py-2 px-4 rounded-md text-gray-500 cursor-not-allowed">Pilar: Feedback (Em
+                    breve)</a>
+            </nav>
+        </aside>
+
+        <script type="module" src="js/mecanicas.js"></script>
+    </body>
+
+</html>

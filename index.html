@@ -13,59 +13,112 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
 
-    <body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4">
+    <!-- O body agora é um container flexível em coluna para acomodar o header e o main -->
 
-        <div id="app-container" class="w-full max-w-4xl relative">
-            <!-- TELA DE CONFIGURAÇÃO (será preenchida pelo JS) -->
-            <div id="configurator" class="space-y-6 p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl">
-                <header class="text-center mb-6">
-                    <h1 class="text-3xl md:text-4xl font-bold text-white">Criador de Mini-Jogos Didáticos</h1>
-                    <p class="mt-2 text-lg text-gray-300">Atividade Interativa para a Turma</p>
-                    <p class="mt-4 text-base text-gray-400">Vamos projetar um jogo juntos! A turma decide, e nós
-                        construímos. Escolham uma opção em cada categoria para definirmos os pilares do nosso jogo.</p>
-                </header>
+    <body class="bg-gray-900 text-white flex flex-col min-h-screen">
 
-                <main>
-                    <!-- Barra de Progresso -->
-                    <div class="w-full bg-gray-700 rounded-full h-2.5 mb-6">
-                        <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full"
-                            style="width: 0%; transition: width 0.5s;"></div>
-                    </div>
-
-                    <!-- Os cards dos pilares serão inseridos aqui pelo ui.js -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-
-                    <div class="mt-8 text-center">
-                        <button id="build-button"
-                            class="w-full md:w-auto bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-700 transition-all disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center mx-auto"
-                            disabled>
-                            🎮 Construir Protótipo do Jogo 🕹️!
-                        </button>
-                    </div>
-                </main>
-                <footer class="mt-12 border-t border-gray-700 pt-8">
-                    <h3 class="text-xl font-bold text-center text-gray-400 mb-8">Desenvolvido por</h3>
-                    <!-- Os cards dos desenvolvedores serão inseridos aqui pelo ui.js -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10"></div>
-                </footer>
-            </div>
-
-            <!-- TELA DO JOGO (a estrutura permanece, mas o conteúdo é gerenciado pelo JS) -->
-            <div id="game-container" class="p-8 bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl hidden-screen">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 id="game-title" class="text-2xl font-bold text-blue-400">Jogando...</h2>
-                    <div id="game-stats" class="flex items-center space-x-4 text-xl"></div>
+        <!-- Header da Barra de Navegação -->
+        <header class="bg-gray-800 shadow-lg sticky top-0 z-40">
+            <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="index.html" class="text-xl font-bold text-white">🎮 Criador de Jogos</a>
+                <div>
+                    <button id="menu-btn" class="text-white focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
-                <div id="question-area"
-                    class="text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+            </nav>
+        </header>
+        <!-- 2. Conteúdo Principal da Página -->
+        <main class="flex-grow flex items-center justify-center p-4">
+
+            <!-- O container do seu app -->
+            <div id="app-container" class="w-full max-w-4xl relative">
+                <!-- TELA DE CONFIGURAÇÃO -->
+                <div id="configurator" class="space-y-6 p-6 md:p-8 bg-gray-800 rounded-2xl shadow-2xl">
+
+                    <header class="text-center mb-6">
+                        <h1 class="text-3xl md:text-4xl font-bold text-white">Criador de Mini-Jogos Didáticos
+                        </h1>
+                        <p class="mt-2 text-lg text-gray-300">Atividade Interativa para a Turma</p>
+                        <p class="mt-4 text-base text-gray-400">Vamos projetar um jogo juntos! A turma decide, e
+                            nós
+                            construímos. Escolham uma opção em cada categoria para definirmos os pilares do
+                            nosso jogo.</p>
+                    </header>
+
+                    <main>
+                        <!-- Barra de Progresso -->
+                        <div class="w-full bg-gray-700 rounded-full h-2.5 mb-6">
+                            <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full"
+                                style="width: 0%; transition: width 0.5s;"></div>
+                        </div>
+
+                        <!-- Os cards dos pilares serão inseridos aqui pelo ui.js -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+
+                        <div class="mt-8 text-center">
+                            <button id="build-button"
+                                class="w-full md:w-auto bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:bg-green-700 transition-all disabled:bg-gray-600 disabled:cursor-not-allowed flex items-center justify-center mx-auto"
+                                disabled>
+                                🎮 Construir Protótipo do Jogo 🕹️!
+                            </button>
+                        </div>
+                    </main>
+                    <footer class="mt-12 border-t border-gray-700 pt-8">
+                        <h3 class="text-xl font-bold text-center text-gray-400 mb-8">Desenvolvido por</h3>
+                        <!-- Os cards dos desenvolvedores serão inseridos aqui pelo ui.js -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10"></div>
+                    </footer>
                 </div>
-                <div id="answer-area" class="mt-8"></div>
-                <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8"></div>
-                <button id="restart-button"
-                    class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold hidden">Jogar
-                    Novamente</button>
+
+                <!-- TELA DO JOGO -->
+                <div id="game-container" class="p-8 bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl hidden-screen">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 id="game-title" class="text-2xl font-bold text-blue-400">Jogando...</h2>
+                        <div id="game-stats" class="flex items-center space-x-4 text-xl"></div>
+                    </div>
+                    <div id="question-area"
+                        class="text-center text-3xl font-light bg-gray-900 p-8 rounded-lg min-h-[120px] flex items-center justify-center">
+                    </div>
+                    <div id="answer-area" class="mt-8"></div>
+                    <div id="feedback-message" class="mt-6 text-center text-2xl font-bold h-8"></div>
+                    <button id="restart-button"
+                        class="mt-8 w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-bold hidden">Jogar
+                        Novamente</button>
+                </div>
             </div>
-        </div>
+        </main>
+
+        <!-- Overlay do Menu -->
+        <div id="menu-overlay" class="overlay"></div>
+
+        <!-- Menu Lateral (Sidebar) -->
+        <aside id="sidebar-menu" class="sidebar">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold">Navegação</h2>
+                <button id="close-menu-btn" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-2">
+                <a href="index.html" class="block py-2 px-4 rounded-md text-blue-400 bg-gray-700">Criador Interativo</a>
+                <a href="mecanicas.html" class="block py-2 px-4 rounded-md text-gray-300 hover:bg-gray-700">Pilar:
+                    Mecânicas</a>
+                <a href="#" class="block py-2 px-4 rounded-md text-gray-500 cursor-not-allowed">Pilar: Regras (Em
+                    breve)</a>
+                <a href="#" class="block py-2 px-4 rounded-md text-gray-500 cursor-not-allowed">Pilar: Feedback (Em
+                    breve)</a>
+            </nav>
+        </aside>
 
         <!-- Ponto de entrada principal para a lógica JavaScript -->
         <script type="module" src="js/main.js"></script>
