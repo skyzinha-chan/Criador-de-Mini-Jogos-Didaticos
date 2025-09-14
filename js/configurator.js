@@ -53,6 +53,8 @@ export function initializeConfigurator ( buildCallback ) {
             uiElements.buildButton.innerHTML = '🎮 Construir Protótipo do Jogo 🕹️!'
         }, 1000 )
     } )
+
+    checkAllSelected()
 }
 
 /**
